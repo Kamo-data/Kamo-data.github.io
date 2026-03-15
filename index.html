@@ -3,23 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kamo-data — Portfolio Data Engineer</title>
-  <meta name="description" content="Portfolio de Kamo-data (David Limoisin) : projets Data Engineering, SQL, dbt, PostgreSQL, Docker, Metabase et dashboards analytiques." />
+  <title>Watt'sUp — Suivi conso électricité</title>
+  <meta name="description" content="Watt'sUp : ingestion d'exports Engie, stockage PostgreSQL, modélisation dbt, tests de qualité et dashboards Metabase." />
   <style>
     :root{
-      --bg:#0b1220; --card:#121a2b; --text:#e8eefc; --muted:#a9b7d6;
-      --accent:#7dd3fc; --accent2:#a78bfa; --border:rgba(255,255,255,.08);
+      --bg:#0b1220;
+      --card:#121a2b;
+      --text:#e8eefc;
+      --muted:#a9b7d6;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --border:rgba(255,255,255,.08);
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
       background:linear-gradient(180deg, #070b14, #0b1220 35%, #0b1220);
       color:var(--text);
     }
+
     a{color:var(--accent); text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
+
+    .container{
+      max-width:1120px;
+      margin:0 auto;
+      padding:28px 18px 64px;
+    }
 
     .banner{
       position:relative;
@@ -27,54 +40,64 @@
       background:rgba(255,255,255,.02);
       overflow:hidden;
     }
+
     .banner .inner{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
       padding:18px 18px 0;
     }
+
     .banner figure{margin:0}
+
     .banner img{
       width:100%;
-      height:240px;
+      height:260px;
       object-fit:cover;
       object-position:center top;
-      border-radius:18px;
+      border-radius:20px;
       border:1px solid var(--border);
       box-shadow:0 14px 30px rgba(0,0,0,.35);
       display:block;
     }
+
     .banner .overlay{
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(7,11,20,.18), rgba(7,11,20,.82));
+      background:linear-gradient(180deg, rgba(7,11,20,.18), rgba(7,11,20,.78));
       pointer-events:none;
     }
 
     header{
       display:flex;
-      gap:16px;
+      gap:18px;
       align-items:flex-start;
       justify-content:space-between;
       flex-wrap:wrap;
       margin-bottom:18px;
     }
+
     .title h1{
       margin:0;
-      font-size:28px;
-      letter-spacing:.2px
+      font-size:32px;
+      line-height:1.15;
+      letter-spacing:.2px;
     }
+
     .title p{
-      margin:8px 0 0;
+      margin:12px 0 0;
       color:var(--muted);
-      line-height:1.65;
-      max-width:780px
+      line-height:1.7;
+      max-width:800px;
+      font-size:16px;
     }
+
     .badges{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      align-items:center
+      align-items:center;
     }
+
     .badge{
       display:inline-flex;
       align-items:center;
@@ -90,20 +113,41 @@
     .grid{
       display:grid;
       grid-template-columns:1fr;
-      gap:14px;
-      margin-top:18px
+      gap:16px;
+      margin-top:18px;
     }
+
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px;
+      border-radius:20px;
+      padding:20px;
       box-shadow:0 10px 25px rgba(0,0,0,.25);
     }
-    .card h2{margin:0 0 8px; font-size:18px}
-    .card h3{margin:0 0 8px; font-size:15px}
-    .card p{margin:0; color:var(--muted); line-height:1.6}
-    .meta{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
+
+    .card h2{
+      margin:0 0 10px;
+      font-size:20px;
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .meta{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
     .chip{
       font-size:12px;
       color:#d8e4ff;
@@ -112,12 +156,14 @@
       padding:6px 10px;
       border-radius:999px;
     }
+
     .cta{
-      margin-top:14px;
+      margin-top:16px;
       display:flex;
       gap:10px;
-      flex-wrap:wrap
+      flex-wrap:wrap;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -129,98 +175,95 @@
       color:var(--text);
       font-size:13px;
     }
+
     .btn.primary{
       border-color:rgba(125,211,252,.35);
       background:rgba(125,211,252,.12);
     }
+
     .btn:hover{
-      filter:brightness(1.1);
-      text-decoration:none
+      filter:brightness(1.08);
+      text-decoration:none;
     }
 
-    .two-cols{
+    .intro{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:1.1fr .9fr;
       gap:16px;
     }
 
-    .gallery{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      margin-top:14px;
-    }
-    .gallery figure{
-      margin:0;
-      padding:0;
-    }
-    .gallery img{
-      width:100%;
-      height:auto;
-      border-radius:14px;
-      border:1px solid var(--border);
-      display:block;
-    }
-    .gallery figcaption{
-      margin-top:8px;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-
-    .highlight{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-    .highlight .box{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:12px;
-    }
-    .highlight .box strong{
-      display:block;
-      font-size:12px;
-      color:#d8e4ff;
-      letter-spacing:.2px;
-    }
-    .highlight .box span{
-      display:block;
-      margin-top:6px;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
     .stats{
-      margin-top:14px;
       display:grid;
       grid-template-columns:repeat(3, 1fr);
       gap:12px;
+      margin-top:14px;
     }
-    .stats .stat{
+
+    .stat{
       border:1px solid var(--border);
       background:rgba(255,255,255,.03);
-      border-radius:14px;
+      border-radius:16px;
       padding:14px;
     }
-    .stats .stat strong{
+
+    .stat strong{
       display:block;
       font-size:12px;
       color:#d8e4ff;
       letter-spacing:.2px;
     }
-    .stats .stat span{
+
+    .stat span{
       display:block;
       margin-top:8px;
       font-size:22px;
       font-weight:700;
       color:var(--text);
+      line-height:1.2;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+      margin-top:6px;
+    }
+
+    figure{
+      margin:0;
+      padding:0;
+    }
+
+    img{
+      width:100%;
+      height:auto;
+      border-radius:16px;
+      border:1px solid var(--border);
+      display:block;
+    }
+
+    figcaption{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    ul.clean{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.7;
     }
 
     footer{
-      margin-top:26px;
+      margin-top:28px;
       color:var(--muted);
       font-size:13px;
       display:flex;
@@ -231,24 +274,40 @@
       padding-top:14px;
     }
 
-    .small{font-size:13px; color:var(--muted)}
-    code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:8px}
+    code{
+      background:rgba(255,255,255,.06);
+      padding:2px 6px;
+      border-radius:8px;
+    }
 
-    @media (max-width: 900px){
-      .two-cols{grid-template-columns:1fr}
-      .highlight{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr}
-      .banner img{height:180px}
+    @media (max-width: 960px){
+      .intro,
+      .split,
+      .dashboard-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .banner img{
+        height:180px;
+      }
+
+      .title h1{
+        font-size:28px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <section class="banner" aria-label="Bannière du portfolio">
+  <section class="banner" aria-label="Bannière du projet">
     <div class="overlay" aria-hidden="true"></div>
     <div class="inner">
       <figure>
-        <img src="assets/img/01_dashboard_overview.png" alt="Bannière Watt'sUp" />
+        <img src="assets/img/01_dashboard_overview.png" alt="Watt'sUp - Vue d'ensemble consommation" />
       </figure>
     </div>
   </section>
@@ -256,30 +315,29 @@
   <div class="container">
     <header>
       <div class="title">
-        <h1>Kamo-data — Portfolio Data Engineer</h1>
+        <h1>Watt'sUp — Suivi conso électricité</h1>
         <p>
-          Je m’appelle <strong>David Limoisin</strong>. Je construis des projets “maison” orientés
-          <strong>Data Engineering</strong> et <strong>Data Analyst</strong> :
-          ingestion, modélisation, tests, stockage et visualisation.
-          Mon objectif est de démontrer une approche pragmatique, reproductible et proche des contraintes d’un contexte réel.
+          Watt’sUp est un projet data construit à partir d’exports réels <strong>Engie</strong>.
+          L’objectif est de transformer des fichiers bruts en données fiables et exploitables :
+          ingestion Python, stockage <strong>PostgreSQL</strong>, modélisation <strong>dbt</strong>,
+          contrôles de qualité et restitution dans <strong>Metabase</strong>.
         </p>
       </div>
 
       <div class="badges">
-        <span class="badge">GitHub : <a href="https://github.com/Kamo-data" target="_blank" rel="noopener">Kamo-data</a></span>
-        <span class="badge">LinkedIn : <a href="https://www.linkedin.com/in/david-limoisin" target="_blank" rel="noopener">david-limoisin</a></span>
+        <span class="badge">GitHub : <a href="https://github.com/Kamo-data/wattsup" target="_blank" rel="noopener">repo Watt'sUp</a></span>
+        <span class="badge">Auteur : <a href="https://www.linkedin.com/in/david-limoisin" target="_blank" rel="noopener">David Limoisin</a></span>
       </div>
     </header>
 
     <section class="grid">
-      <article class="card two-cols">
+      <article class="card intro">
         <div>
-          <h2>Watt'sUp — Suivi conso électricité</h2>
+          <h2>Ce que fait le projet</h2>
           <p>
-            <strong>Watt’sUp</strong> est un projet portfolio complet construit à partir d’exports réels
-            <strong>Engie</strong>. J’y ai mis en place un pipeline local reproductible :
-            ingestion Python, stockage dans <strong>PostgreSQL</strong>, transformation avec <strong>dbt</strong>,
-            tests de qualité, puis restitution dans <strong>Metabase</strong>.
+            Le pipeline prend en charge plusieurs types d’exports énergétiques et les aligne dans un modèle analytique cohérent.
+            L’ensemble permet d’analyser la consommation sur plusieurs angles :
+            volume global, saisonnalité, profil horaire, différence semaine / week-end et pics de puissance.
           </p>
 
           <div class="meta">
@@ -293,12 +351,12 @@
 
           <div class="stats">
             <div class="stat">
-              <strong>Données intégrées</strong>
-              <span>Mensuel + horaire + puissance max</span>
+              <strong>Périmètre</strong>
+              <span>Mensuel, horaire, puissance max</span>
             </div>
             <div class="stat">
-              <strong>Dashboards</strong>
-              <span>3 vues analytiques</span>
+              <strong>Restitution</strong>
+              <span>3 dashboards</span>
             </div>
             <div class="stat">
               <strong>Qualité</strong>
@@ -307,84 +365,96 @@
           </div>
 
           <div class="cta">
-            <a class="btn primary" href="https://github.com/Kamo-data/wattsup" target="_blank" rel="noopener">
-              Voir le repo Watt'sUp
-            </a>
-            <a class="btn" href="https://www.linkedin.com/in/david-limoisin" target="_blank" rel="noopener">
-              Me contacter sur LinkedIn
-            </a>
-          </div>
-
-          <div class="highlight">
-            <div class="box">
-              <strong>Ce que je démontre</strong>
-              <span>
-                Ingestion de fichiers hétérogènes, séparation <code>raw / staging / marts</code>,
-                tests dbt, pipeline reproductible et dashboards lisibles.
-              </span>
-            </div>
-            <div class="box">
-              <strong>Ce que j’améliore ensuite</strong>
-              <span>
-                Multi-fournisseurs, harmonisation métier kW/kVA, alertes sur anomalies,
-                enrichissement météo et documentation plus produit.
-              </span>
-            </div>
+            <a class="btn primary" href="https://github.com/Kamo-data/wattsup" target="_blank" rel="noopener">Voir le code source</a>
+            <a class="btn" href="https://kamo-data.github.io/wattsup/" target="_blank" rel="noopener">Voir la doc dbt</a>
           </div>
         </div>
 
         <div>
-          <div class="gallery">
-            <figure>
-              <img src="assets/img/01_dashboard_overview.png" alt="Watt'sUp - Vue d'ensemble consommation" />
-              <figcaption>
-                Dashboard 1 — Vue d’ensemble consommation : volume total, tendance journalière et saisonnalité mensuelle.
-              </figcaption>
-            </figure>
+          <h2>Périmètre fonctionnel</h2>
+          <ul class="clean">
+            <li>ingestion d’exports Engie mensuels</li>
+            <li>ingestion d’exports Engie horaires</li>
+            <li>ingestion des puissances max journalières et mensuelles</li>
+            <li>normalisation des données en staging</li>
+            <li>construction de tables analytiques en marts</li>
+            <li>tests sur la qualité, les périodes et les valeurs attendues</li>
+            <li>dashboards Metabase pour l’analyse et l’exploration</li>
+          </ul>
+        </div>
+      </article>
 
-            <figure>
-              <img src="assets/img/02_dashboard_hourly.png" alt="Watt'sUp - Profil horaire" />
-              <figcaption>
-                Dashboard 2 — Profil horaire : consommation moyenne par heure, comparaison semaine / week-end et pics horaires.
-              </figcaption>
-            </figure>
+      <article class="card split">
+        <div>
+          <h2>Architecture</h2>
+          <p>
+            Le projet suit une logique simple et reproductible :
+          </p>
+          <ul class="clean">
+            <li>fichiers source <code>CSV / XLSX</code></li>
+            <li>ingestion Python vers des tables <code>raw</code></li>
+            <li>transformation avec <code>dbt</code></li>
+            <li>tests automatiques</li>
+            <li>visualisation dans Metabase</li>
+          </ul>
+        </div>
 
-            <figure>
-              <img src="assets/img/03_dashboard_power.png" alt="Watt'sUp - Puissance maximale" />
-              <figcaption>
-                Dashboard 3 — Puissance maximale : pics journaliers, tendance mensuelle et analyse des pointes.
-              </figcaption>
-            </figure>
-          </div>
+        <div>
+          <h2>Ce que le projet démontre</h2>
+          <ul class="clean">
+            <li>capacité à structurer une mini-stack data complète</li>
+            <li>gestion de fichiers réels hétérogènes</li>
+            <li>séparation claire <code>raw / staging / marts</code></li>
+            <li>mise en place de tests de qualité</li>
+            <li>restitution orientée usage métier</li>
+          </ul>
         </div>
       </article>
 
       <article class="card">
-        <h2>Pourquoi ce projet est utile dans mon portfolio</h2>
-        <p>
-          Watt’sUp montre ma capacité à partir d’un besoin concret, à structurer la donnée,
-          à produire des tables analytiques fiables et à les restituer dans des dashboards simples à lire.
-          C’est un projet représentatif d’un positionnement <strong>Data Engineer / SQL / BI</strong>.
-        </p>
+        <h2>Dashboards</h2>
+        <div class="dashboard-grid">
+          <figure>
+            <img src="assets/img/01_dashboard_overview.png" alt="Watt'sUp - Vue d'ensemble consommation" />
+            <figcaption>
+              <strong>Vue d’ensemble consommation</strong><br>
+              Consommation totale, nombre de jours couverts, moyenne journalière, tendance quotidienne et saisonnalité mensuelle.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img src="assets/img/02_dashboard_hourly.png" alt="Watt'sUp - Profil horaire" />
+            <figcaption>
+              <strong>Profil horaire</strong><br>
+              Consommation moyenne par heure, comparaison semaine / week-end, pics horaires et intensité moyenne jour / heure.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img src="assets/img/03_dashboard_power.png" alt="Watt'sUp - Puissance maximale" />
+            <figcaption>
+              <strong>Puissance maximale</strong><br>
+              Suivi des pics journaliers, vue mensuelle, comparaison entre max mensuel et pics journaliers, top 20 des pointes.
+            </figcaption>
+          </figure>
+        </div>
       </article>
 
       <article class="card">
-        <h2>Prochains projets</h2>
-        <p>
-          Je construis ce portfolio projet par projet. La suite suivra la même logique :
-          un besoin concret, une architecture claire, une exécution reproductible et une restitution simple.
-        </p>
-        <div class="meta" style="margin-top:12px;">
-          <span class="chip">BudgetOps — suivi budget</span>
-          <span class="chip">HomeOps — suivi chauffage/eau</span>
-          <span class="chip">JobOps — suivi candidatures</span>
-          <span class="chip">QualityOps — tests & data contracts</span>
+        <h2>Évolutions possibles</h2>
+        <div class="meta">
+          <span class="chip">Multi-fournisseurs</span>
+          <span class="chip">kW / kVA harmonisés</span>
+          <span class="chip">Anomalies de consommation</span>
+          <span class="chip">Enrichissement météo</span>
+          <span class="chip">Alerting</span>
+          <span class="chip">Dashboards plus métier</span>
         </div>
       </article>
     </section>
 
     <footer>
-      <div>© <span id="y"></span> Kamo-data — David Limoisin</div>
+      <div>© <span id="y"></span> Watt'sUp — projet data par David Limoisin</div>
       <div>
         <a href="https://github.com/Kamo-data" target="_blank" rel="noopener">GitHub</a>
         •
