@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Watt'sUp — Suivi conso électricité</title>
-  <meta name="description" content="Watt'sUp : ingestion d'exports Engie, stockage PostgreSQL, modélisation dbt, tests de qualité et dashboards Metabase." />
+  <title>Kamo-data — Portfolio Data Engineer</title>
+  <meta name="description" content="Portfolio de Kamo-data (David Limoisin) : projets Data Engineering, SQL, dbt, PostgreSQL, Docker et dashboards analytiques." />
   <style>
     :root{
       --bg:#0b1220;
@@ -29,9 +29,9 @@
     a:hover{text-decoration:underline}
 
     .container{
-      max-width:1120px;
+      max-width:1100px;
       margin:0 auto;
-      padding:28px 18px 64px;
+      padding:28px 18px 60px;
     }
 
     .banner{
@@ -42,7 +42,7 @@
     }
 
     .banner .inner{
-      max-width:1120px;
+      max-width:1100px;
       margin:0 auto;
       padding:18px 18px 0;
     }
@@ -51,10 +51,9 @@
 
     .banner img{
       width:100%;
-      height:260px;
+      height:220px;
       object-fit:cover;
-      object-position:center top;
-      border-radius:20px;
+      border-radius:18px;
       border:1px solid var(--border);
       box-shadow:0 14px 30px rgba(0,0,0,.35);
       display:block;
@@ -63,13 +62,13 @@
     .banner .overlay{
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(7,11,20,.18), rgba(7,11,20,.78));
+      background:linear-gradient(180deg, rgba(7,11,20,.25), rgba(7,11,20,.85));
       pointer-events:none;
     }
 
     header{
       display:flex;
-      gap:18px;
+      gap:16px;
       align-items:flex-start;
       justify-content:space-between;
       flex-wrap:wrap;
@@ -78,17 +77,15 @@
 
     .title h1{
       margin:0;
-      font-size:32px;
-      line-height:1.15;
+      font-size:28px;
       letter-spacing:.2px;
     }
 
     .title p{
-      margin:12px 0 0;
+      margin:8px 0 0;
       color:var(--muted);
-      line-height:1.7;
-      max-width:800px;
-      font-size:16px;
+      line-height:1.6;
+      max-width:760px;
     }
 
     .badges{
@@ -113,36 +110,31 @@
     .grid{
       display:grid;
       grid-template-columns:1fr;
-      gap:16px;
+      gap:14px;
       margin-top:18px;
     }
 
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid var(--border);
-      border-radius:20px;
-      padding:20px;
+      border-radius:18px;
+      padding:18px;
       box-shadow:0 10px 25px rgba(0,0,0,.25);
     }
 
     .card h2{
-      margin:0 0 10px;
-      font-size:20px;
-    }
-
-    .card h3{
       margin:0 0 8px;
-      font-size:16px;
+      font-size:20px;
     }
 
     .card p{
       margin:0;
       color:var(--muted);
-      line-height:1.65;
+      line-height:1.6;
     }
 
     .meta{
-      margin-top:14px;
+      margin-top:12px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
@@ -158,7 +150,7 @@
     }
 
     .cta{
-      margin-top:16px;
+      margin-top:14px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
@@ -186,84 +178,88 @@
       text-decoration:none;
     }
 
-    .intro{
+    .project-layout{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1fr;
       gap:16px;
     }
 
-    .stats{
+    .project-top{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .project-kpis{
+      display:grid;
+      grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:14px;
     }
 
-    .stat{
+    .project-kpis .box{
       border:1px solid var(--border);
       background:rgba(255,255,255,.03);
-      border-radius:16px;
-      padding:14px;
+      border-radius:14px;
+      padding:12px;
     }
 
-    .stat strong{
+    .project-kpis .box strong{
       display:block;
       font-size:12px;
       color:#d8e4ff;
       letter-spacing:.2px;
     }
 
-    .stat span{
+    .project-kpis .box span{
       display:block;
-      margin-top:8px;
-      font-size:22px;
-      font-weight:700;
-      color:var(--text);
-      line-height:1.2;
-    }
-
-    .split{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-
-    .dashboard-grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
       margin-top:6px;
-    }
-
-    figure{
-      margin:0;
-      padding:0;
-    }
-
-    img{
-      width:100%;
-      height:auto;
-      border-radius:16px;
-      border:1px solid var(--border);
-      display:block;
-    }
-
-    figcaption{
-      margin-top:10px;
-      font-size:13px;
       color:var(--muted);
       line-height:1.55;
     }
 
-    ul.clean{
-      margin:10px 0 0;
-      padding-left:18px;
+    .cover figure{
+      margin:0;
+    }
+
+    .cover img,
+    .gallery img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--border);
+      display:block;
+    }
+
+    .small{
+      font-size:13px;
       color:var(--muted);
-      line-height:1.7;
+      margin-top:10px;
+      line-height:1.5;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+      margin-top:4px;
+    }
+
+    .gallery figure{
+      margin:0;
+      padding:0;
+    }
+
+    .gallery figcaption{
+      margin-top:8px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
     }
 
     footer{
-      margin-top:28px;
+      margin-top:26px;
       color:var(--muted);
       font-size:13px;
       display:flex;
@@ -280,34 +276,32 @@
       border-radius:8px;
     }
 
-    @media (max-width: 960px){
-      .intro,
-      .split,
-      .dashboard-grid{
+    @media (max-width: 900px){
+      .project-top{
         grid-template-columns:1fr;
       }
 
-      .stats{
+      .gallery{
+        grid-template-columns:1fr;
+      }
+
+      .project-kpis{
         grid-template-columns:1fr;
       }
 
       .banner img{
-        height:180px;
-      }
-
-      .title h1{
-        font-size:28px;
+        height:170px;
       }
     }
   </style>
 </head>
 <body>
 
-  <section class="banner" aria-label="Bannière du projet">
+  <section class="banner" aria-label="Bannière du portfolio">
     <div class="overlay" aria-hidden="true"></div>
     <div class="inner">
       <figure>
-        <img src="assets/img/01_dashboard_overview.png" alt="Watt'sUp - Vue d'ensemble consommation" />
+        <img src="assets/img/placeholder.png" alt="Bannière Kamo-data" />
       </figure>
     </div>
   </section>
@@ -315,110 +309,96 @@
   <div class="container">
     <header>
       <div class="title">
-        <h1>Watt'sUp — Suivi conso électricité</h1>
+        <h1>Kamo-data — Portfolio Data Engineer</h1>
         <p>
-          Watt’sUp est un projet data construit à partir d’exports réels <strong>Engie</strong>.
-          L’objectif est de transformer des fichiers bruts en données fiables et exploitables :
-          ingestion Python, stockage <strong>PostgreSQL</strong>, modélisation <strong>dbt</strong>,
-          contrôles de qualité et restitution dans <strong>Metabase</strong>.
+          Je m’appelle <strong>David Limoisin</strong>. Je construis des projets orientés
+          <strong>Data Engineering</strong>, <strong>SQL</strong> et <strong>BI</strong>
+          pour montrer une approche pragmatique de l’ingestion, de la modélisation,
+          des tests, du stockage et de la visualisation. L’objectif de cette vitrine
+          est de présenter des réalisations concrètes, proches de contraintes réelles,
+          dans une logique de poste CDI ou de mission data.
         </p>
       </div>
 
       <div class="badges">
-        <span class="badge">GitHub : <a href="https://github.com/Kamo-data/wattsup" target="_blank" rel="noopener">repo Watt'sUp</a></span>
-        <span class="badge">Auteur : <a href="https://www.linkedin.com/in/david-limoisin" target="_blank" rel="noopener">David Limoisin</a></span>
+        <span class="badge">GitHub : <a href="https://github.com/Kamo-data" target="_blank" rel="noopener">Kamo-data</a></span>
+        <span class="badge">LinkedIn : <a href="https://www.linkedin.com/in/david-limoisin" target="_blank" rel="noopener">david-limoisin</a></span>
       </div>
     </header>
 
     <section class="grid">
-      <article class="card intro">
-        <div>
-          <h2>Ce que fait le projet</h2>
-          <p>
-            Le pipeline prend en charge plusieurs types d’exports énergétiques et les aligne dans un modèle analytique cohérent.
-            L’ensemble permet d’analyser la consommation sur plusieurs angles :
-            volume global, saisonnalité, profil horaire, différence semaine / week-end et pics de puissance.
-          </p>
+      <article class="card project-layout">
+        <div class="project-top">
+          <div>
+            <h2>Watt'sUp — Suivi conso électricité</h2>
+            <p>
+              <strong>Watt’sUp</strong> est le premier projet de cette vitrine.
+              Il transforme des exports réels <strong>Engie</strong> en données exploitables grâce à
+              une chaîne simple et reproductible :
+              ingestion Python, stockage dans <strong>PostgreSQL</strong>,
+              modélisation avec <strong>dbt</strong>, contrôles de qualité
+              et restitution dans <strong>Metabase</strong>.
+            </p>
+            <p style="margin-top:12px;">
+              Le projet couvre plusieurs angles d’analyse :
+              consommation globale, évolution journalière et mensuelle,
+              profil horaire, comparaison semaine / week-end
+              et suivi des pics de puissance maximale.
+            </p>
 
-          <div class="meta">
-            <span class="chip">Python</span>
-            <span class="chip">PostgreSQL</span>
-            <span class="chip">dbt</span>
-            <span class="chip">Metabase</span>
-            <span class="chip">Docker Compose</span>
-            <span class="chip">GitHub Actions</span>
+            <div class="meta">
+              <span class="chip">Python</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">dbt</span>
+              <span class="chip">Metabase</span>
+              <span class="chip">Docker Compose</span>
+              <span class="chip">GitHub Actions</span>
+            </div>
+
+            <div class="cta">
+              <a class="btn primary" href="https://github.com/Kamo-data/wattsup" target="_blank" rel="noopener">
+                Voir le repo Watt'sUp
+              </a>
+              <a class="btn" href="https://www.linkedin.com/in/david-limoisin" target="_blank" rel="noopener">
+                Me contacter sur LinkedIn
+              </a>
+            </div>
+
+            <div class="project-kpis">
+              <div class="box">
+                <strong>Ce que montre le projet</strong>
+                <span>
+                  Un pipeline reproductible avec séparation <code>raw / staging / marts</code>,
+                  tests dbt, documentation et dashboards analytiques lisibles.
+                </span>
+              </div>
+              <div class="box">
+                <strong>Périmètre actuel</strong>
+                <span>
+                  Intégration des exports mensuels, horaires et des puissances maximales
+                  journalières et mensuelles, avec 3 dashboards de restitution.
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div class="stats">
-            <div class="stat">
-              <strong>Périmètre</strong>
-              <span>Mensuel, horaire, puissance max</span>
-            </div>
-            <div class="stat">
-              <strong>Restitution</strong>
-              <span>3 dashboards</span>
-            </div>
-            <div class="stat">
-              <strong>Qualité</strong>
-              <span>92 tests dbt</span>
-            </div>
-          </div>
-
-          <div class="cta">
-            <a class="btn primary" href="https://github.com/Kamo-data/wattsup" target="_blank" rel="noopener">Voir le code source</a>
-            <a class="btn" href="https://kamo-data.github.io/wattsup/" target="_blank" rel="noopener">Voir la doc dbt</a>
+          <div class="cover">
+            <figure>
+              <img src="assets/img/01_dashboard_overview.png" alt="Watt'sUp - Vue d'ensemble consommation" />
+            </figure>
+            <p class="small">
+              Vue principale du projet : consommation totale, tendance journalière
+              et saisonnalité mensuelle.
+            </p>
           </div>
         </div>
 
-        <div>
-          <h2>Périmètre fonctionnel</h2>
-          <ul class="clean">
-            <li>ingestion d’exports Engie mensuels</li>
-            <li>ingestion d’exports Engie horaires</li>
-            <li>ingestion des puissances max journalières et mensuelles</li>
-            <li>normalisation des données en staging</li>
-            <li>construction de tables analytiques en marts</li>
-            <li>tests sur la qualité, les périodes et les valeurs attendues</li>
-            <li>dashboards Metabase pour l’analyse et l’exploration</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card split">
-        <div>
-          <h2>Architecture</h2>
-          <p>
-            Le projet suit une logique simple et reproductible :
-          </p>
-          <ul class="clean">
-            <li>fichiers source <code>CSV / XLSX</code></li>
-            <li>ingestion Python vers des tables <code>raw</code></li>
-            <li>transformation avec <code>dbt</code></li>
-            <li>tests automatiques</li>
-            <li>visualisation dans Metabase</li>
-          </ul>
-        </div>
-
-        <div>
-          <h2>Ce que le projet démontre</h2>
-          <ul class="clean">
-            <li>capacité à structurer une mini-stack data complète</li>
-            <li>gestion de fichiers réels hétérogènes</li>
-            <li>séparation claire <code>raw / staging / marts</code></li>
-            <li>mise en place de tests de qualité</li>
-            <li>restitution orientée usage métier</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <h2>Dashboards</h2>
-        <div class="dashboard-grid">
+        <div class="gallery">
           <figure>
             <img src="assets/img/01_dashboard_overview.png" alt="Watt'sUp - Vue d'ensemble consommation" />
             <figcaption>
               <strong>Vue d’ensemble consommation</strong><br>
-              Consommation totale, nombre de jours couverts, moyenne journalière, tendance quotidienne et saisonnalité mensuelle.
+              Synthèse globale de la période analysée : volume, moyenne journalière, évolution et saisonnalité.
             </figcaption>
           </figure>
 
@@ -426,7 +406,7 @@
             <img src="assets/img/02_dashboard_hourly.png" alt="Watt'sUp - Profil horaire" />
             <figcaption>
               <strong>Profil horaire</strong><br>
-              Consommation moyenne par heure, comparaison semaine / week-end, pics horaires et intensité moyenne jour / heure.
+              Lecture fine des usages : moyenne par heure, semaine vs week-end et pics de consommation horaire.
             </figcaption>
           </figure>
 
@@ -434,27 +414,30 @@
             <img src="assets/img/03_dashboard_power.png" alt="Watt'sUp - Puissance maximale" />
             <figcaption>
               <strong>Puissance maximale</strong><br>
-              Suivi des pics journaliers, vue mensuelle, comparaison entre max mensuel et pics journaliers, top 20 des pointes.
+              Analyse des pointes journalières et mensuelles pour suivre les pics de charge.
             </figcaption>
           </figure>
         </div>
       </article>
 
       <article class="card">
-        <h2>Évolutions possibles</h2>
-        <div class="meta">
-          <span class="chip">Multi-fournisseurs</span>
-          <span class="chip">kW / kVA harmonisés</span>
-          <span class="chip">Anomalies de consommation</span>
-          <span class="chip">Enrichissement météo</span>
-          <span class="chip">Alerting</span>
-          <span class="chip">Dashboards plus métier</span>
+        <h2>Prochains projets</h2>
+        <p>
+          Cette vitrine a vocation à s’enrichir projet par projet, toujours avec la même logique :
+          partir d’un besoin concret, construire une architecture claire,
+          produire une exécution reproductible et livrer une restitution compréhensible.
+        </p>
+        <div class="meta" style="margin-top:12px;">
+          <span class="chip">BudgetOps — suivi budget</span>
+          <span class="chip">HomeOps — suivi chauffage/eau</span>
+          <span class="chip">JobOps — suivi candidatures</span>
+          <span class="chip">QualityOps — tests & data contracts</span>
         </div>
       </article>
     </section>
 
     <footer>
-      <div>© <span id="y"></span> Watt'sUp — projet data par David Limoisin</div>
+      <div>© <span id="y"></span> Kamo-data — David Limoisin</div>
       <div>
         <a href="https://github.com/Kamo-data" target="_blank" rel="noopener">GitHub</a>
         •
